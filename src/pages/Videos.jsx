@@ -5,6 +5,8 @@ import axios from 'axios';
 import LoopIcon from '@mui/icons-material/Loop';
 import WarningIcon from '@mui/icons-material/Warning';
 import VideoCard from "../components/VideoCard";
+import Grid from '@mui/material/Grid';
+
 
 const keywordUri = `https://youtube.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_YOUTUBE_API_KEY}&maxResults=25&part=snippet&q=surfing`;
 const popularUri = `https://youtube.googleapis.com/youtube/v3/videos?chart=mostPopular&key=${process.env.REACT_APP_YOUTUBE_API_KEY}&maxResults=25&part=snippet`;
@@ -37,8 +39,11 @@ export default function Videos() {
     {error && <p><WarningIcon/>Something is wrong</p>}
     {/*video 여기서 띄움, videos에 아무것도 로딩 못해서 map함수 사용 불가*/}
     {videos && (
-    <ul style={{backgroundColor:""}}>
+    <ul>
+
+    <Grid container spacing={1} columns={16} width="100%">
       {videos.map(video => <VideoCard video={video} />)}       
+    </Grid>
     </ul>
     )}    
     </>

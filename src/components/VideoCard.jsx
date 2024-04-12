@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { formatAgo } from "../util/date";
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+
 import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -22,22 +23,18 @@ export default function VideoCard({ video }) {
     return null;
   const videoId = typeof(video.id) === 'string' ? video.id : video.id.videoId;
 
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        {[...Array(3)].map((_, index) => (
-          <Grid item xs={12} sm={4} key={index}>
-            <Item onClick={() => navigate(`/videos/watch/${videoId}`)}>
+  return (   
+          <Grid item xs={5}>
+            {/* navigate에서 데이터 전달 방법: 1) replace: false면 뒤로 가기 안됨. 2) state: 정보전달 o state에 obj형식으로 필요한 정보 주기 */}
+            <Item onClick={() => navigate(`/videos/watch/${videoId}`, {state:{video}})}   >
               <img src={thumbnails.medium.url} alt={title} />
               <div>
-                <p>{title}</p>
-                <p>{channelTitle}</p>
-                <p>{formatAgo(publishedAt, 'ko')}</p>
+                <Typography variant="subtitle1">{title}</Typography>
+                <Typography variant="body2">{channelTitle}</Typography>
+                <Typography variant="body2">{formatAgo(publishedAt, 'ko')}</Typography>
               </div>
             </Item>   
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+          </Grid>      
+      
   );
 }
