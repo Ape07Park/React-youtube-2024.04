@@ -14,29 +14,32 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
   
-  height: 350,
+  height: 280,
 }));
 
 export default function VideoCard({ video }) {
   const navigate = useNavigate();
   
   const { title, thumbnails, channelTitle, publishedAt } = video.snippet;
+  const {viewCount} = video.statistics;
+
   if (typeof(video.id) !== 'string' && video.id.kind === 'youtube#channel')
     return null;
   const videoId = typeof(video.id) === 'string' ? video.id : video.id.videoId;
 
   return (   
-          <Grid item xs={4} md={4}>
+          <Grid item xs={5} md={5}>
             {/* navigate에서 데이터 전달 방법: 1) replace: false면 뒤로 가기 안됨. 2) state: 정보전달 o state에 obj형식으로 필요한 정보 주기 */}
             <Item onClick={() => navigate(`/videos/watch/${videoId}`, {state:{video}})}   >
               <img src={thumbnails.medium.url} alt={title} />
               <div>
                 <Typography variant="subtitle1">{title}</Typography>
                 <Typography variant="body2">{channelTitle}</Typography>
-                <Typography variant="body2">{formatAgo(publishedAt, 'ko')}</Typography>
+                <Typography variant="body2">{formatAgo(publishedAt, 'ko')}--{viewCount}</Typography>
+
               </div>
             </Item>   
-          </Grid>      
+          </Grid>       
       
   );
 }

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { formatAgo } from "../util/date";
 import { useNavigate } from "react-router-dom";
 
+
 export default function SmallVideoCard({video}) {
   const navigate = useNavigate();
   const videoId = video.id.videoId

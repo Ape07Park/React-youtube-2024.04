@@ -1,10 +1,9 @@
 import React from "react";
-import {useQuery} from '@tanstack/react-query';
-import axios from "axios";
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { useChannelInfo } from "../api/youtube";
 
-export default function ChannelInfo({id, name}) {
+export default function ChannelInfo({ id, name }) {
   // const {data: url} = useQuery({
   //   queryKey: ['channel', id], 
   //   queryFn: async () => {
@@ -15,13 +14,15 @@ export default function ChannelInfo({id, name}) {
   //   },
   //   staleTime: 1000 * 60 * 5, // 5분
   // })
+  const { url } = useChannelInfo(id);
   
-  const {url} = useChannelInfo(id);
-  return (   
-          <Stack direction={'row'} sx={{alignItems: 'center'}} spacing={2}>
-            {url && <img src={url} alt={name} height={64} width={64}/>}
-            <h3>{name}</h3>         
-          </Stack>
+  return (
+    <Stack direction={'row'} sx={{ alignItems: 'center' }} spacing={2} >
       
+      {url && <img src={url} alt={name} height={64} width={64} />}
+      <h4>{name}</h4>
+      <Typography>구독자{}</Typography>
+    </Stack>
+
   );
 }

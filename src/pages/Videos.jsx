@@ -1,7 +1,6 @@
 
 import { useParams } from "react-router-dom";
-import {useQuery} from '@tanstack/react-query';
-import axios from 'axios';
+
 import LoopIcon from '@mui/icons-material/Loop';
 import WarningIcon from '@mui/icons-material/Warning';
 import VideoCard from "../components/VideoCard";
