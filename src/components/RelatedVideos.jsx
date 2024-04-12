@@ -1,25 +1,27 @@
 import React from "react";
-import {useQuery} from '@tanstack/react-query';
-import axios from "axios";
+
 import Stack from '@mui/material/Stack';
 import SmallVideoCard from "./SmallVideoCard";
 
 import LoopIcon from '@mui/icons-material/Loop';
 import WarningIcon from '@mui/icons-material/Warning';
+import { useRelatedVideo } from "../api/youtube";
 
 export default function RelatedVideos({id, name}) {
-  const uri = `https://youtube.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_YOUTUBE_API_KEY}&maxResults=25&part=snippet&q=surfing`;
+  // const uri = `https://youtube.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_YOUTUBE_API_KEY}&maxResults=25&part=snippet&q=surfing`;
   
-  const {isLoading, error, data: videos} = useQuery({
-    queryKey: ['relatedVideos', id], 
-    queryFn: async () => {
-      return axios
-              .get('/data/searchChannel.json')
-              // .get(uri)
-              .then(res => res.data.items)
-    },
-    staleTime: 1000 * 60 * 1, // 1분
-  })
+  // const {isLoading, error, data: videos} = useQuery({
+  //   queryKey: ['relatedVideos', id], 
+  //   queryFn: async () => {
+  //     return axios
+  //             .get('/data/searchChannel.json')
+  //             // .get(uri) // 실제 사용
+  //             .then(res => res.data.items)
+  //   },
+  //   staleTime: 1000 * 60 * 1, // 1분
+  // })
+  
+  const {isLoading, error, videos} = useRelatedVideo(id);
 
   return (   
     <>

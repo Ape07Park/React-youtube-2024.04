@@ -13,6 +13,8 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: 'center',
   color: theme.palette.text.secondary,
+  
+  height: 350,
 }));
 
 export default function VideoCard({ video }) {
@@ -24,7 +26,7 @@ export default function VideoCard({ video }) {
   const videoId = typeof(video.id) === 'string' ? video.id : video.id.videoId;
 
   return (   
-          <Grid item xs={5}>
+          <Grid item xs={4} md={4}>
             {/* navigate에서 데이터 전달 방법: 1) replace: false면 뒤로 가기 안됨. 2) state: 정보전달 o state에 obj형식으로 필요한 정보 주기 */}
             <Item onClick={() => navigate(`/videos/watch/${videoId}`, {state:{video}})}   >
               <img src={thumbnails.medium.url} alt={title} />
