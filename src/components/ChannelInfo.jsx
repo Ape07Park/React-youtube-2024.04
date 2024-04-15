@@ -15,7 +15,7 @@ export default function ChannelInfo({ id, name }) {
   //   staleTime: 1000 * 60 * 5, // 5분
   // })
   const { url } = useChannelInfo(id);
-  
+  // subscribeNum 넣기 
   return (
     <Stack direction={'row'} sx={{ alignItems: 'center' }} spacing={2} >
       

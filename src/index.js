@@ -6,6 +6,11 @@ import Videos from './pages/Videos';
 import VideoDetail from './pages/VideoDetail';
 import NotFound from './pages/NotFound';
 import reportWebVitals from './reportWebVitals';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+import ProtectedRoute from './pages/ProtectedRoute';
+import ViewRecord from './pages/ViewRecord';
+
 
 const router = createBrowserRouter([
   {
@@ -17,7 +22,12 @@ const router = createBrowserRouter([
       {path: 'Videos', element:<Videos />},
       {path: 'Videos/:keyword', element:<Videos />},
       {path: 'Videos/watch/:videoId', element:<VideoDetail />},
+      { path: 'signUp', element: <SignUp /> },
+      { path: 'signIn', element: <SignIn /> },
 
+      // 로그인한 사용자만 볼 수 있게 함, 사용자 정보를 알아야만 조회수를 볼 수 있기에 
+      {path: 'videos/record',
+        element: <ProtectedRoute><ViewRecord /></ProtectedRoute> }, 
     ]
   }
 ]);
