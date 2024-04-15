@@ -11,6 +11,7 @@ export default function SmallVideoCard({video}) {
   const navigate = useNavigate();
   const videoId = video.id.videoId
   const {title, thumbnails, publishedAt, channelTitle} = video.snippet;
+  
   return(
     
     <Card onClick={() => navigate(`/videos/watch/${videoId}`, {state:{video}})} style={{width:"100%"}} >
@@ -20,6 +21,7 @@ export default function SmallVideoCard({video}) {
         <div>
         <Typography variant="subtitle2" >{title}</Typography>
         <Typography variant="body2">{channelTitle}</Typography>
+       
         <Typography variant="body2">{formatAgo(publishedAt, 'ko')}</Typography>
         </div>
         </Stack>

@@ -43,7 +43,7 @@ export default function Videos() {
     {videos && (
     <ul>
 
-    <Grid container  columns={16} width="100%">
+    <Grid container columns={16} width="100%">
       {videos.map(video => <VideoCard video={video} />)}       
     </Grid>
     </ul>

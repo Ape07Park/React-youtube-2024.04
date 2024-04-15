@@ -24,6 +24,7 @@ export default function SearchHeader() {
   }, [keyword]);
 
   const {user, logout } = useAuthContext();
+  
 
   return (
     <header>
@@ -58,9 +59,11 @@ export default function SearchHeader() {
           <Grid item xs={4}>
             <Stack direction={'row'} spacing={1} justifyContent={'right'} alignItems={'center'}>
               {user && <Link to='/videos/record'>시청기록</Link>}
+              
               {user && user.photoURL && (
                 <img src={user.photoURL} alt={user.displayName} height='32' style={{borderRadius:100}} />
-              )}         
+              )}   
+
               {user && <p>{user.displayName}</p>}
               {user && <button onClick={logout}>로그아웃</button>}
               {!user && <Link to='/signUp'>로그인</Link>}
