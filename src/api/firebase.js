@@ -25,24 +25,24 @@ export function register({email, password, name, photo}){ //  사용처에서 ob
   .catch(console.error);
 }
 
-export function login({email, password}){
-   signInWithEmailAndPassword(auth, email, password) // email password 받기 
-  .catch(console.error); 
-    
+export function login({ email, password }) {
+  console.log('firebase.js:login(): ', email, password);
+  signInWithEmailAndPassword(auth, email, password) // email, password 받기
+    .catch(console.error);
 }
 
-export function loginWithGithub(){
+export function loginWithGithub() {
   const provider = new GithubAuthProvider();
   signInWithPopup(auth, provider)
-  .catch(console.error); 
+    .catch(console.error);
 }
 
 export function logout() {
-    signOut(auth).catch(console.error);
+  signOut(auth).catch(console.error);
 }
 
 export function onUserStateChanged(callback) {
   onAuthStateChanged(auth, (user) => {
-      callback(user);
+    callback(user);
   });
 }
