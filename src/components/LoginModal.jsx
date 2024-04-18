@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { styled } from '@mui/material/styles';
-import { loginWithGithub, login, register } from '../api/firebase';
+import { login, register, loginWithGithub, loginWithGoogle } from '../api/firebase';
 import { uploadImage } from "../api/cloudinary";
 import { MuiFileInput } from 'mui-file-input';
 import Box from '@mui/material/Box';
@@ -45,7 +45,7 @@ export default function LoginModal() {
 
   return (
     <Fragment>
-      <Button variant="outlined" onClick={handleClickOpen} size="small">
+      <Button variant="outlined" onClick={handleClickOpen}>
         로그인
       </Button>
       <BootstrapDialog
@@ -91,7 +91,9 @@ export default function LoginModal() {
             </a>
           </Typography> 
           <Stack direction={'row'} spacing={2} sx={{ ml: 2, mt: 2}}>
-            <img src='/img/google-logo.png' alt='google' width={32} />
+            <a href='javascript:void(0)' onClick={loginWithGoogle}>
+              <img src='/img/google-logo.png' alt='google' width={32} />
+            </a>
             <a href='javascript:void(0)' onClick={loginWithGithub}>
               <img src='/img/github-logo.png' alt='github' width={32} />
             </a>
