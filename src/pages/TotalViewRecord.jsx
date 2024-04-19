@@ -7,16 +7,21 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import WatchRecord from "../components/WatchRecord";
-import { getTotalWatchVideoRecordByUser } from '../api/firebase';
+// import { getTotalWatchVideoRecordByUser } from '../api/firebase';
+import useWatchVideo from '../hooks/useWatchVideo';
 
 export default function TotalViewRecord() {
-  const [totalRecords, setTotalRecords] = useState();
-  getTotalWatchVideoRecordByUser()
-    .then(setTotalRecords);  
+  // const [totalRecords, setTotalRecords] = useState();
+  // getTotalWatchVideoRecordByUser()
+  //   .then(setTotalRecords);  
+  const { getRecord: { isLoading, error, data: totalRecords}} = useWatchVideo();
+  // console.log(totalRecords);
 
   return (
     <>
       <Typography variant="h5" gutterBottom sx={{fontWeight:'bold'}}>사용자별 시청기록</Typography>
+      {isLoading && <Typography>Loading...</Typography>}
+      {error && <Typography>Error occurred!!!</Typography>}
       {totalRecords && (
         Object.keys(totalRecords).map(user => (
           <Accordion>

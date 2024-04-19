@@ -6,37 +6,33 @@ import Videos from './pages/Videos';
 import VideoDetail from './pages/VideoDetail';
 import NotFound from './pages/NotFound';
 import reportWebVitals from './reportWebVitals';
-import SignUp from './pages/SignUp';
-import SignIn from './pages/SignIn';
 import ProtectedRoute from './pages/ProtectedRoute';
 import ViewRecord from './pages/ViewRecord';
-
+import TotalViewRecord from './pages/TotalViewRecord';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement:<NotFound/>,
-    children:[
-      {index: true, element: <Videos />},
-      {path: 'Videos', element:<Videos />},
-      {path: 'Videos/:keyword', element:<Videos />},
-      {path: 'Videos/watch/:videoId', element:<VideoDetail />},
-      { path: 'signUp', element: <SignUp /> },
-      { path: 'signIn', element: <SignIn /> },
-
-      // 로그인한 사용자만 볼 수 있게 함, 사용자 정보를 알아야만 조회수를 볼 수 있기에 
-      {path: 'videos/record',
-        element: <ProtectedRoute><ViewRecord /></ProtectedRoute> }, 
+    errorElement: <NotFound />,
+    children: [
+      { index: true, element: <Videos /> },
+      { path: '/videos', element: <Videos /> },
+      { path: '/videos/:keyword', element: <Videos /> },
+      { path: '/videos/watch/:videoId', element: <VideoDetail /> },
+      { path: '/videos/record',
+        element: <ProtectedRoute><ViewRecord /></ProtectedRoute> },
+      { path: '/videos/admin', 
+        element: <ProtectedRoute requireAdmin><TotalViewRecord /></ProtectedRoute> },
     ]
   }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

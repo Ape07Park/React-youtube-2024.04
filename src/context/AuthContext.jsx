@@ -7,7 +7,8 @@ export function AuthContextProvider({ children }) {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    onUserStateChanged(user => {setUser(user)});
+    onUserStateChanged(user => {
+      setUser(user)});
   }, []);
 
   return (
@@ -18,5 +19,7 @@ export function AuthContextProvider({ children }) {
 }
 
 export function useAuthContext() {
-  return useContext(AuthContext);
+  const auth = useContext(AuthContext);
+  // console.log(auth.user);
+  return auth;
 }

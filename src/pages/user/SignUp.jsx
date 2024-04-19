@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { register, loginWithGithub } from '../api/firebase';
-import { uploadImage } from "../api/cloudinary";
+import { register, loginWithGithub } from '../../api/firebase';
+import { uploadImage } from "../../api/cloudinary";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function SignUp() {

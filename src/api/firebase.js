@@ -83,14 +83,55 @@ export async function addWatchVideoRecord({ user, video }) {
   });
 }
 
-export async function getWatchVideoRecord(userId) {
+// export async function getWatchVideoRecord(userId) {
+//   return get(ref(database, 'videoRecords'))
+//     .then(snapshot => {
+//       if (snapshot.exists()) {
+//         const objects = snapshot.val();
+//         let records = Object.values(objects);   // object를 array로 변환
+//         records = records.filter(record => record.userId === userId);   // userId 필터링
+//         records = records.sort((a, b) => b.watchAt.localeCompare(a.watchAt));   // 내림차순 정렬
+//         const newRecords = records.filter((record, idx) => {    // 중복 제거
+//           return (
+//             records.findIndex(eachRecord => {
+//               return record.videoId === eachRecord.videoId
+//             }) === idx
+//           ) 
+//         });
+//         return newRecords;
+//       }
+//       return null;
+//     });
+// }
+
+// export async function getTotalWatchVideoRecordByUser() {
+//   return get(ref(database, 'videoRecords'))
+//     .then(snapshot => {
+//       if (snapshot.exists()) {
+//         const objects = snapshot.val();
+//         let records = Object.values(objects);   // object를 array로 변환
+//         records = records.sort((a, b) => b.watchAt.localeCompare(a.watchAt));   // 내림차순 정렬
+//         const newRecords = records.filter((record, idx) => {    // 중복 제거
+//           return (
+//             records.findIndex(eachRecord => {
+//               return (record.videoId === eachRecord.videoId && record.userId === eachRecord.userId)
+//             }) === idx
+//           ) 
+//         });
+//         const result = Object.groupBy(newRecords, ({ userName }) => userName);    // Grouping
+//         return result;
+//       }
+//       return null;
+//     });
+// }
+
+export async function getWatchVideoCount(userId) {
   return get(ref(database, 'videoRecords'))
     .then(snapshot => {
       if (snapshot.exists()) {
         const objects = snapshot.val();
-        let records = Object.values(objects);   // object를 array로 변환
-        records = records.filter(record => record.userId === userId);   // userId 필터링
-        records = records.sort((a, b) => b.watchAt.localeCompare(a.watchAt));   // 내림차순 정렬
+        const records = Object.values(objects)
+          .filter(record => record.userId === userId);   // userId 필터링
         const newRecords = records.filter((record, idx) => {    // 중복 제거
           return (
             records.findIndex(eachRecord => {
@@ -98,29 +139,9 @@ export async function getWatchVideoRecord(userId) {
             }) === idx
           ) 
         });
-        return newRecords;
+        // console.log(newRecords.length);
+        return newRecords.length;
       }
-      return null;
-    });
-}
-
-export async function getTotalWatchVideoRecordByUser() {
-  return get(ref(database, 'videoRecords'))
-    .then(snapshot => {
-      if (snapshot.exists()) {
-        const objects = snapshot.val();
-        let records = Object.values(objects);   // object를 array로 변환
-        records = records.sort((a, b) => b.watchAt.localeCompare(a.watchAt));   // 내림차순 정렬
-        const newRecords = records.filter((record, idx) => {    // 중복 제거
-          return (
-            records.findIndex(eachRecord => {
-              return (record.videoId === eachRecord.videoId && record.userId === eachRecord.userId)
-            }) === idx
-          ) 
-        });
-        const result = Object.groupBy(newRecords, ({ userName }) => userName);    // Grouping
-        return result;
-      }
-      return null;
-    });
+      return 0;
+    });  
 }
