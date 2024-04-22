@@ -12,9 +12,10 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <AuthContextProvider>  {/* 이 태그 안에서는 훅 사용 가능  */ }
+    // <QueryClientProvider client={queryClient}> 안에 넣은 이유는 SearchHeader가 queryClient에서 만든 훅을 쓰게 하기 위해 즉 범위 안에 들어가기 위해 
+    <AuthContextProvider>  {/* 이 태그 안에서는 훅 사용 가능  */}
 
-      <QueryClientProvider client={queryClient}> 
+      <QueryClientProvider client={queryClient}>
         <SearchHeader />
         { /*useQuery라는 훅을 쓰기 위해 이거 만듦 */}
         <Outlet />

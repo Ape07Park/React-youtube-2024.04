@@ -84,26 +84,6 @@ export async function addWatchVideoRecord({ user, video }) {
   });
 }
 
-export async function getWatchVideoRecord(userId) {
-  return get(ref(database, 'videoRecords'))
-    .then(snapshot => {
-      if (snapshot.exists()) {
-        const objects = snapshot.val();
-        let records = Object.values(objects);   // object를 array로 변환
-        records = records.filter(record => record.userId === userId);   // userId 필터링
-        records = records.sort((a, b) => b.watchAt.localeCompare(a.watchAt));   // 내림차순 정렬
-        const newRecords = records.filter((record, idx) => {    // 중복 제거
-          return (
-            records.findIndex(eachRecord => {
-              return record.videoId === eachRecord.videoId
-            }) === idx
-          ) 
-        });
-        return newRecords;
-      }
-      return null;
-    });
-}
 //**  자바에선 List<User> JS에선 object에 object 임 그래서 Array<object>로 변환함
 // export async function getWatchVideoRecord(userId) {
 //   return get(ref(database, 'videoRecords'))
