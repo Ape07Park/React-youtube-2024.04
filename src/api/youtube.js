@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query'; // java의 service 기능 
 import axios from 'axios';
 
 export const useVideo = keyword => {

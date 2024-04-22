@@ -14,7 +14,7 @@ function App() {
   return (
     <AuthContextProvider>  {/* 이 태그 안에서는 훅 사용 가능  */ }
 
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}> 
         <SearchHeader />
         { /*useQuery라는 훅을 쓰기 위해 이거 만듦 */}
         <Outlet />

@@ -36,6 +36,8 @@ export default function LoginModal() {
     else
       register(userInfo);
   }
+  
+  // 프로파일 넣기 
   const handleMode = () => { setIsLoginMode(!isLoginMode); }
   const handleUpload = newFile => {
     setFile(newFile);
@@ -76,6 +78,7 @@ export default function LoginModal() {
               label="Password" required defaultValue={userInfo.password} id="outlined-password-input"
               type="password" name='password' onChange={handleChange}
             />
+            {/* display none이면 가리기 가능, block은 inline이냐 등에 대한 것 */}
             <div style={{display: isLoginMode ? 'none' : 'block', alignItems: 'center'}}>
               <TextField
                 required label="Nickname" defaultValue={userInfo.name} id="outlined-required"

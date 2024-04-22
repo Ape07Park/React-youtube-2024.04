@@ -22,6 +22,7 @@ const router = createBrowserRouter([
       { path: '/videos/watch/:videoId', element: <VideoDetail /> },
       { path: '/videos/record',
         element: <ProtectedRoute><ViewRecord /></ProtectedRoute> },
+      // 관리자만 접근할 수 있게 requireAdmin 걸어놓음
       { path: '/videos/admin', 
         element: <ProtectedRoute requireAdmin><TotalViewRecord /></ProtectedRoute> },
     ]
