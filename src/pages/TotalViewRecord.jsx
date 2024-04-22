@@ -20,8 +20,8 @@ export default function TotalViewRecord() {
   return (
     <>
       <Typography variant="h5" gutterBottom sx={{fontWeight:'bold'}}>사용자별 시청기록</Typography>
-      {isLoading && <Typography>Loading...</Typography>}
-      {error && <Typography>Error occurred!!!</Typography>}
+      {isLoading && <img src='/img/loading.gif' alt='Loading...' />}
+      {error && <img src='/img/error.png' alt='Error occurred!!!' />}
       {totalRecords && (
         Object.keys(totalRecords).map(user => (
           <Accordion>

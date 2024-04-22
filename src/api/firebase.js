@@ -85,6 +85,29 @@ export async function addWatchVideoRecord({ user, video }) {
 }
 
 //**  자바에선 List<User> JS에선 object에 object 임 그래서 Array<object>로 변환함
+export async function getWatchVideoRecord() {
+  return get(ref(database, 'videoRecords'))
+    .then(snapshot => { //  snapshot :특정 시점에 스토리지에 저장된 파일의 상태(현재 파일 시스템의 상태)를 저장
+      if (snapshot.exists()) { // record가 있으면 - rs.next() 와 같은 의미
+        const objects = snapshot.val(); // db에 든 거 가져오기. ** firebase엔 json으로 들어가있음 그러나 자바에선 일일이 json을 풀어야 함 
+        let records = Object.values(objects);   // ** object를 array로 변환
+        records = records.sort((a, b) => b.watchAt.localeCompare(a.watchAt));   // 내림차순 정렬 이유는 중복제거 코드에서 뒤에 것이 날라가기 때문 
+        const newRecords = records.filter((record, idx) => {    // 중복 제거 
+          return (
+            records.findIndex(eachRecord => {
+              return (record.videoId === eachRecord.videoId && record.userId === eachRecord.userId) 
+            }) === idx
+          ) 
+        });
+        const result = Object.groupBy(newRecords, ({ userName }) => userName);    // Grouping
+        return result;
+      }
+      return null;
+    });  
+}
+
+
+//**  자바에선 List<User> JS에선 object에 object 임 그래서 Array<object>로 변환함
 // export async function getWatchVideoRecord(userId) {
 //   return get(ref(database, 'videoRecords'))
 //     .then(snapshot => { //  snapshot :특정 시점에 스토리지에 저장된 파일의 상태(현재 파일 시스템의 상태)를 저장

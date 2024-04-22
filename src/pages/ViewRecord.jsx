@@ -17,8 +17,8 @@ export default function ViewRecord() {
   return (
     <>
       <Typography variant="h5" gutterBottom sx={{fontWeight:'bold'}}>나의 시청기록</Typography>
-      {isLoading && <Typography>Loading...</Typography>}
-      {error && <Typography>Error occurred!!!</Typography>}
+      {isLoading && <img src='/img/loading.gif' alt='Loading...' />}
+      {error && <img src='/img/error.png' alt='Error occurred!!!' />}
       {user && totalRecords[user.displayName] && (
         <Grid container spacing={1}>
           {totalRecords[user.displayName].map(record => (
